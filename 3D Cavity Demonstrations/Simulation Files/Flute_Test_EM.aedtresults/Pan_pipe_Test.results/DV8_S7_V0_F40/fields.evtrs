@@ -12,9 +12,9 @@ $begin 'Header'
 	Source_5='Eigenmode_5'
 	MixedOrder='true'
 	HighestOrder=2
-	Factor_0=1.08642e+09
-	Factor_1=1.21013e+09
-	Factor_2=1.03832e+09
-	Factor_3=1.04684e+09
-	Factor_4=1.23791e+09
+	Factor_0=8.57236e+08
+	Factor_1=1.19185e+09
+	Factor_2=8.95411e+08
+	Factor_3=8.59569e+08
+	Factor_4=1.2455e+09
 $end 'Header'
