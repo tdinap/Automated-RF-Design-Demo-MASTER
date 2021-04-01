@@ -2766,7 +2766,7 @@ class HfssModeler(COMWrapper):
                 "Name:="		, cs_name
             ])
 
-    def subtract(self, blank_name, tool_names, keep_originals=False):
+    def subtract_old(self, blank_name, tool_names, keep_originals=False):
         selection_array = ["NAME:Selections",
                            "Blank Parts:=", blank_name,
                            "Tool Parts:=", ",".join(tool_names)]
@@ -2775,6 +2775,29 @@ class HfssModeler(COMWrapper):
             ["NAME:UniteParameters", "KeepOriginals:=", keep_originals]
         )
         return blank_name
+
+    def subtract(self, blank_name, tool_names, keep_originals=False):
+        selection_array = ["NAME:Selections",
+                           "Blank Parts:=", blank_name,
+                           "Tool Parts:=", ",".join(tool_names)]
+        self._modeler.Subtract(
+            selection_array,
+            ["NAME:SubtractParameters", "KeepOriginals:=", keep_originals]
+        )
+        return blank_name
+
+    def rotate(self, selection_name, axis, angle):
+        # assert axis in "XYZ"
+        selection_array = ["NAME:Selections",
+                           "Selections:="	, selection_name,
+                           "NewPartsModelFlag:="	, "Model"]
+        self._modeler.Rotate(
+            selection_array,
+            ["NAME:RotateParameters",
+              "RotateAxis:="	, axis,
+              "RotateAngle:=", str(angle)+"deg"]
+        )
+        return selection_name
 
     def _fillet(self, radius, vertex_index, obj):
         vertices = self._modeler.GetVertexIDsFromObject(obj)
