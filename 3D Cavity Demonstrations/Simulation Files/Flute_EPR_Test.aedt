@@ -4026,10 +4026,128 @@ $begin 'AnsoftProject'
 				Default_Phase='0deg'
 			$end 'PlotDefaults'
 			$begin 'FieldsPlotManagerID'
-				NextUniqueID=0
+				NextUniqueID=2
 				MoveBackwards=false
-				NumQuantityType=0
-				NumPlots=0
+				NumQuantityType=1
+				$begin 'QuantityFolder_1'
+					PlotFolder='MeshPlots'
+					PlotFolderInstance=7
+					FolderSettingsType=11
+					'Real time mode'=true
+					$begin 'ColorMapSettings'
+						ColorMapType='Spectrum'
+						SpectrumType='Rainbow'
+						UniformColor(127, 255, 255)
+						RampColor(255, 127, 127)
+					$end 'ColorMapSettings'
+					$begin 'Scale3DSettings'
+						unit=90
+						m_nLevels=15
+						minvalue=1
+						maxvalue=100
+						log=false
+						IntrinsicMin=1
+						IntrinsicMax=100
+						LimitFieldValuePrecision=false
+						FieldValuePrecisionDigits=4
+						dB=false
+						ScaleType=0
+						UserSpecifyValues(0)
+						ValueNumberFormatTypeAuto=0
+						ValueNumberFormatTypeScientific=true
+						ValueNumberFormatWidth=12
+						ValueNumberFormatPrecision=4
+					$end 'Scale3DSettings'
+					$begin 'Marker3DSettings'
+						MarkerType=9
+						MarkerMapSize=true
+						MarkerMapColor=false
+						MarkerSize=0.25
+					$end 'Marker3DSettings'
+					$begin 'Arrow3DSettings'
+						ArrowType=1
+						ArrowMapSize=true
+						ArrowMapColor=true
+						ShowArrowTail=true
+						ArrowSize=0.25
+						ArrowMinMagnitude=1
+						ArrowMaxMagnitude=0
+						ArrowMagnitudeThreshold=0
+						ArrowMagnitudeFilteringFlag=false
+						ArrowMinIntrinsicMagnitude=0
+						ArrowMaxIntrinsicMagnitude=1
+					$end 'Arrow3DSettings'
+					$begin 'DeformScaleSettings'
+						ShowDeformation=true
+						MinScaleFactor=0
+						MaxScaleFactor=1
+						DeformationScale=0
+						ShowDeformationOutline=false
+					$end 'DeformScaleSettings'
+				$end 'QuantityFolder_1'
+				NumPlots=2
+				$begin 'PlotDefinition_1'
+					PlotDefinitionType='Mesh_field_type'
+					PlotName='Mesh1'
+					PlotDefinitionId=0
+					VersionID=0
+					SolutionId=18
+					UserSpecifyName=0
+					UserSpecifyFolder=0
+					QuantityId=-1
+					PlotFolder='MeshPlots'
+					FieldType='Fields'
+					StreamlinePlot=false
+					AdjacentSidePlot=false
+					FullModelPlot=false
+					IntrinsicVar='Phase=\'0deg\''
+					FieldPlotGeometry(1, 128, 2, 1, 657)
+					FilterIds(0)
+					'Real time mode'=true
+					$begin 'MeshSettings'
+						'Scale factor'=100
+						Transparency=0
+						'Mesh type'='Shaded'
+						'Surface only'=true
+						'Add grid'=true
+						Refinement=0
+						'Use geometry color'=true
+						'Mesh line color'(0, 0, 255)
+						'Filled color'(255, 255, 255)
+					$end 'MeshSettings'
+					EnableGaussianSmoothing=false
+				$end 'PlotDefinition_1'
+				$begin 'PlotDefinition_2'
+					PlotDefinitionType='Mesh_field_type'
+					PlotName='Mesh2'
+					PlotDefinitionId=1
+					VersionID=0
+					SolutionId=18
+					UserSpecifyName=0
+					UserSpecifyFolder=0
+					QuantityId=-1
+					PlotFolder='MeshPlots'
+					FieldType='Fields'
+					StreamlinePlot=false
+					AdjacentSidePlot=false
+					FullModelPlot=false
+					IntrinsicVar='Phase=\'0deg\''
+					FieldPlotGeometry(1, 128, 2, 1, 645)
+					FilterIds(0)
+					'Real time mode'=true
+					$begin 'MeshSettings'
+						'Scale factor'=100
+						Transparency=0
+						'Mesh type'='Shaded'
+						'Surface only'=true
+						'Add grid'=true
+						Refinement=0
+						'Use geometry color'=true
+						'Mesh line color'(0, 0, 255)
+						'Filled color'(255, 255, 255)
+					$end 'MeshSettings'
+					EnableGaussianSmoothing=false
+				$end 'PlotDefinition_2'
 			$end 'FieldsPlotManagerID'
 			$begin 'Report3dInGeomWnd'
 				Report3dNum=0
@@ -4297,7 +4415,7 @@ $begin 'AnsoftProject'
 				DesignInstanceID=7
 				$begin 'WindowPosition'
 					$begin 'EditorWindow'
-						Circuit(Editor3d(View('View Orientation Gadget'=1, WindowPos(3, -1, -1, -8, -31, 0, 0, 136, 50), OrientationMatrix(-0.187082901597023, -0.300000011920929, 0.474341750144958, 0, 0.561248660087585, -0.100000001490116, 0.158113896846771, 0, 4.62877292051189e-09, 0.499999970197678, 0.316227793693542, 0, 0, 2.38418579101563e-07, -5.7486834526062, 1, 0, -2.08123254776001, 2.08123254776001, -1, 1, -102.717987060547, 114.215347290039), Drawings[9: 'Box1', 'Chip', 'Pad_1', 'Pad_2', 'jj', 'jj_line', 'jj', 'pads', 'substrate'], 'View Data'('Render Mode'=1, 'Show Ruler'=1, 'Coordinate Systems View Mode'=1, 'CS Triad View Mode'=0, 'Render Facets'=1, GridVisible=1, GridAutoAdjust=1, GridAutoExtents=1, GridType='Rect', GridStyle='Line', NumPixels=30, dXForGrid=0.1, dYForGrid=0.1, dZForGrid=0.1, dRForGrid=0.1, dThetaForGrid=10), ClipPlanes(ClipPlaneOptions(DisableWhenDrawingNewPlane=true, ForceOpqaueForUnclipped=false, ShowClipped=false, Transparency=0, HandleColor=16776960)))))
+						Circuit(Editor3d(View('View Orientation Gadget'=1, WindowPos(5, -1, -1, -8, -31, 0, 0, 136, 50), OrientationMatrix(-3.72529029846191e-09, -0.0265139043331146, 1.86264514923096e-09, 0, 0.0265138857066631, 3.72529029846191e-09, -6.05359673500061e-09, 0, -5.50622125672362e-09, -1.86264514923096e-09, 0.0265139043331146, 0, -0.294619143009186, -0.672578513622284, -6.37319993972778, 1, 0, -0.129872694611549, -0.00814075767993927, -0.0472008883953094, 0.0573467835783958, 0.754451274871826, 10.4766807556152), Drawings[11: 'Box1', 'Chip', 'Pad_1', 'Pad_2', 'jj', 'jj_line', 'jj', 'pads', 'substrate', 'Mesh1', 'Mesh2'], 'View Data'('Render Mode'=1, 'Show Ruler'=1, 'Coordinate Systems View Mode'=1, 'CS Triad View Mode'=0, 'Render Facets'=1, GridVisible=1, GridAutoAdjust=1, GridAutoExtents=1, GridType='Rect', GridStyle='Line', NumPixels=30, dXForGrid=0.1, dYForGrid=0.1, dZForGrid=0.1, dRForGrid=0.1, dThetaForGrid=10), ClipPlanes(ClipPlaneOptions(DisableWhenDrawingNewPlane=true, ForceOpqaueForUnclipped=false, ShowClipped=false, Transparency=0, HandleColor=16776960)))))
 					$end 'EditorWindow'
 				$end 'WindowPosition'
 				$begin 'ReportSetup'
@@ -4347,8 +4465,8 @@ NumFiles= 1
 $begin 'sab'
 Design_6.setup/NativeGeometryFiles/0000006.sab
 BIN000000134528
-ACIS BinaryFileT             SpatialACIS 29.0.1 NTThu Mar 25 22:06:02 2021      ğ?íµ ÷Æ°>»½×Ùß|Û=
-MK7MMTT3_X6WMQXX6TYZU8EZPM3DVYXPHNCPVEZ7EU8SCN47E3DR3QM7FQCTBKP7AQBNUMGN8QBP4Q	body%      ÿÿÿÿÿÿÿÿÿÿÿÿ       ÿÿÿÿ   
+ACIS BinaryFileT             SpatialACIS 29.0.1 NTMon Apr  5 12:27:13 2021      ğ?íµ ÷Æ°>»½×Ùß|Û=
+MJB_MSPT2MAFH2HKR5QNEHXM2Y2CM23RHHCJ4Q6N87A84M656FBMCF479QAA4RV6U6DMKM6PHQBN4P	body%      ÿÿÿÿÿÿÿÿÿÿÿÿ       ÿÿÿÿ   
 ffffffIÀ                             À/@33333“L@string_attrib%   name_attrib%   gen%   attrib%   ÿÿÿÿÿÿÿÿ   ÿÿÿÿ    ¦îß ATTRIB_XACIS_NAME%6Solid1	lump%      ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ       
 ffffffIÀ                             À/@33333“L@transform%   ÿÿÿÿÿÿÿÿ      ğ?                              ğ?                              ğ?                              ğ?properties%	   ansoft%
    %   ÿÿÿÿÿÿÿÿ          ¥îÛ Solid1           ¿¿¿€%   %   %   %   ÿÿÿÿÿÿÿÿ   ÿÿÿÿ   ¦îß ATTRIB_XACIS_ID%1114
@@ -5435,8 +5553,8 @@ h|'@tËà}*CÀˆBë%@Œ$Èz'@EÙ¼Ç$CÀhú*@™¦»ò(@CpéÌa5CÀZÇ ®@E{
 # Ansoft project setting data. Non-Ansoft programs
 # should not read the rest of this file.
 B_SETNGS 1.03
-ACIS BinaryFileT             SpatialACIS 29.0.1 NTThu Mar 25 22:06:02 2021      ğ?íµ ÷Æ°>»½×Ùß|Û=
-MAKVSJPASUZT6DF_D8SFTAHX3663V4HQMDBJCJ8QCBDPMFA65YD64G875KC34MJQUT8RBJR6DFCC4Ptransform%      ÿÿÿÿ      ğ?                              ğ?                              ğ?                              ğ?
+ACIS BinaryFileT             SpatialACIS 29.0.1 NTMon Apr  5 12:27:13 2021      ğ?íµ ÷Æ°>»½×Ùß|Û=
+M44EJ8Q63TC_B_SZC3BRWBZPXX4P3YE6G59KMF85CFA_MJZQBBD5VE66BYC4MR27E3DP3FAN4BBTBPtransform%      ÿÿÿÿ      ğ?                              ğ?                              ğ?                              ğ?
 point%      ÿÿÿÿÿÿÿÿÿÿÿÿ                        	flag%   ansoft%   attrib%   ÿÿÿÿÿÿÿÿ   ÿÿÿÿ    ¥îÛ     
 color%   %   %   ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ   ¥îÛ ÿ ÿ€
 units%   %   %   ÿÿÿÿÿÿÿÿ          ¥îÛ mm     @@%   %   %   ÿÿÿÿÿÿÿÿÿÿÿÿ       ¥îÛ ÀÀÀ€End-of-ACIS-data

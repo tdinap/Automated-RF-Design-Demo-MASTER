@@ -1,52 +1,10 @@
 $begin '$base_index$'
   $begin 'properties'
     all_levels=000000000000
-    time(year=000000002021, month=000000000003, day=000000000026, hour=000000000013, min=000000000043, sec=000000000010)
+    time(year=000000002021, month=000000000004, day=000000000005, hour=000000000012, min=000000000027, sec=000000000026)
     version=000000000000
   $end 'properties'
   $begin '$base_index$'
     $index$(pos=000000000000, lin=000000000001, lvl=000000000000)
   $end '$base_index$'
 $end '$base_index$'
-$begin 'SolutionBlock1'
-	ProductName=''
-	CircuitName='Pan_pipe_Test'
-	VersionID=2
-	PostProcess=false
-	LossLess=true
-	NextUniqueID=71
-	MoveBackwards=false
-	$begin 'VariationIDs'
-		Map(V='Stock_H=\'2.25in\' Stock_L=\'-2in\' Stock_W=\'0.625in\'', ID=8)
-	$end 'VariationIDs'
-	$begin 'LinkedDataList'
-	$end 'LinkedDataList'
-	$begin 'InitialMeshes'
-		M(VID=8, Ver=2, Dir='DV8_V2.imesh/')
-	$end 'InitialMeshes'
-	MeshAssemVersionID=6
-	$begin 'NextAssemVersionID'
-		NextUniqueID=7
-		MoveBackwards=false
-	$end 'NextAssemVersionID'
-	$begin 'DefinitionMeshes'
-		$begin 'DefMeshes_Comp-1'
-			DefinitionID=-1
-			VersionID=5
-			VIDMap('Stock_H=\'2.25in\' Stock_L=\'-2in\' Stock_W=\'0.625in\'', 17)
-			DM(VID=17, Ver=5, Dir='NDV17_V5.dmesh/')
-		$end 'DefMeshes_Comp-1'
-	$end 'DefinitionMeshes'
-	$begin 'MI'
-		$begin 'SubData'
-			ID=0
-			MI(VID=8, Ver=2, Dir='DV8_MI0_V2.sd/')
-		$end 'SubData'
-	$end 'MI'
-$end 'SolutionBlock1'
-$begin 'BlockMapName'
-	FileHeader='SolutionBlock1'
-	'SolutionKey(SimSetup=5, Instance=\'SetupDefinition\', Solution=-1, VersionID=0)'='SolutionBlock2'
-	'SolutionKey(SimSetup=5, Instance=\'SolutionDefinition\', Solution=6, VersionID=0)'='SolutionBlock4'
-	'SolutionKey(SimSetup=5, Instance=\'SolutionDefinition\', Solution=7, VersionID=0)'='SolutionBlock3'
-$end 'BlockMapName'

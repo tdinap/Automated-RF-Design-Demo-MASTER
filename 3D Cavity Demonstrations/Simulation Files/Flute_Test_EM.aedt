@@ -2824,7 +2824,7 @@ $begin 'AnsoftProject'
 					DoLambdaRefine=true
 					DoMaterialLambda=true
 					SetLambdaTarget=false
-					Target=0.2
+					Target=0.4
 					UseMaxTetIncrease=false
 				$end 'Test_EM'
 			$end 'SolveSetups'
@@ -2836,7 +2836,7 @@ $begin 'AnsoftProject'
 			$end 'OptimetricsSetups'
 		$end 'Optimetrics'
 		$begin 'Solutions'
-			FieldType='ScatteredFields'
+			FieldType='EigenPeakElectricField'
 			IncludePortPostProcessing=false
 			UseSpecifiedIncidentPower=false
 			SourceEntry(ID=-10, Index=0, Terminal=false, Terminated=false, Magnitude='1', Phase='0deg')
@@ -2898,10 +2898,99 @@ $begin 'AnsoftProject'
 				Default_Phase='0deg'
 			$end 'PlotDefaults'
 			$begin 'FieldsPlotManagerID'
-				NextUniqueID=0
+				NextUniqueID=1
 				MoveBackwards=false
-				NumQuantityType=0
-				NumPlots=0
+				NumQuantityType=1
+				$begin 'QuantityFolder_1'
+					PlotFolder='E Field'
+					PlotFolderInstance=5
+					FolderSettingsType=11
+					'Real time mode'=true
+					$begin 'ColorMapSettings'
+						ColorMapType='Spectrum'
+						SpectrumType='Rainbow'
+						UniformColor(127, 255, 255)
+						RampColor(255, 127, 127)
+					$end 'ColorMapSettings'
+					$begin 'Scale3DSettings'
+						unit=154
+						m_nLevels=15
+						minvalue=7.12929749914087e-05
+						maxvalue=0.712929749914087
+						log=true
+						IntrinsicMin=0
+						IntrinsicMax=0.712929749914087
+						LimitFieldValuePrecision=true
+						FieldValuePrecisionDigits=4
+						dB=false
+						ScaleType=0
+						UserSpecifyValues(16, 0, 0.0475286468863487, 0.0950572937726974, 0.142585933208466, 0.190114587545395, 0.237643241882324, 0.285171866416931, 0.33270052075386, 0.38022917509079, 0.427757829427719, 0.475286483764648, 0.522815108299255, 0.570343732833862, 0.617872416973114, 0.665401041507721, 0.712929725646973)
+						ValueNumberFormatTypeAuto=0
+						ValueNumberFormatTypeScientific=false
+						ValueNumberFormatWidth=7
+						ValueNumberFormatPrecision=5
+					$end 'Scale3DSettings'
+					$begin 'Marker3DSettings'
+						MarkerType=9
+						MarkerMapSize=true
+						MarkerMapColor=false
+						MarkerSize=0.25
+					$end 'Marker3DSettings'
+					$begin 'Arrow3DSettings'
+						ArrowType=1
+						ArrowMapSize=true
+						ArrowMapColor=true
+						ShowArrowTail=true
+						ArrowSize=0.25
+						ArrowMinMagnitude=-0.5
+						ArrowMaxMagnitude=1.19133753134145
+						ArrowMagnitudeThreshold=0
+						ArrowMagnitudeFilteringFlag=false
+						ArrowMinIntrinsicMagnitude=-0.5
+						ArrowMaxIntrinsicMagnitude=1.21292974991409
+					$end 'Arrow3DSettings'
+					$begin 'DeformScaleSettings'
+						ShowDeformation=true
+						MinScaleFactor=0
+						MaxScaleFactor=1
+						DeformationScale=0
+						ShowDeformationOutline=false
+					$end 'DeformScaleSettings'
+				$end 'QuantityFolder_1'
+				NumPlots=1
+				$begin 'PlotDefinition_1'
+					PlotDefinitionType='Mesh_field_type'
+					PlotName='Mag_E1'
+					PlotDefinitionId=0
+					VersionID=1
+					SolutionId=7
+					UserSpecifyName=0
+					UserSpecifyFolder=0
+					QuantityId=2
+					PlotFolder='E Field'
+					StreamlinePlot=false
+					AdjacentSidePlot=false
+					FullModelPlot=false
+					IntrinsicVar='Phase=\'0deg\''
+					FieldPlotGeometry(1, 64, 0, 1, 275)
+					FilterIds(1, 2)
+					$begin 'PlotOnVolumeSettings'
+						PlotIsoSurface=true
+						PointSize=1
+						Refinement=0
+						CloudSpacing=0.5
+						CloudMinSpacing=0.223819270730019
+						CloudMaxSpacing=0.671457827091217
+						ShadingType=0
+						$begin 'Arrow3DSpacingSettings'
+							ArrowUniform=true
+							ArrowSpacing=1.68132758140564
+							MinArrowSpacing=0.168132752180099
+							MaxArrowSpacing=3.19452238082886
+						$end 'Arrow3DSpacingSettings'
+					$end 'PlotOnVolumeSettings'
+					EnableGaussianSmoothing=false
+				$end 'PlotDefinition_1'
 			$end 'FieldsPlotManagerID'
 			$begin 'Report3dInGeomWnd'
 				Report3dNum=0
@@ -2932,6 +3021,7 @@ $begin 'AnsoftProject'
 					ID=7
 					Name='LastAdaptive'
 					$begin 'SimDataExtractor'
+						SimValue('Mag_E', 1, 154, false, SimValueID=70, 3, 0, 2, 0, false, false, 275, 1, 0, 1, 1, '', 0, 0)
 						$begin 'Sweeps'
 							$begin 'PostprocessSweep'
 								Variable='NormalizedDistance'
@@ -3044,7 +3134,7 @@ $begin 'AnsoftProject'
 				DesignInstanceID=5
 				$begin 'WindowPosition'
 					$begin 'EditorWindow'
-						Circuit(Editor3d(View('View Orientation Gadget'=1, WindowPos(3, -1, -1, -8, -31, 52, 52, 1094, 312), OrientationMatrix(-0.00851909723132849, -0.0136609375476837, 0.0215998571366072, 0, 0.025557279586792, -0.00455364538356662, 0.00719995750114322, 0, 3.57688767493869e-10, 0.0227682292461395, 0.0143999150022864, 0, -0.418965101242065, -0.960995554924011, -5.52651214599609, 1, 0, -1.85714280605316, 1.85714280605316, -1, 1, 0.745925426483154, 10.465690612793), Drawings[1: 'Box1'], 'View Data'('Render Mode'=1, 'Show Ruler'=1, 'Coordinate Systems View Mode'=1, 'CS Triad View Mode'=0, 'Render Facets'=1, GridVisible=1, GridAutoAdjust=1, GridAutoExtents=1, GridType='Rect', GridStyle='Line', NumPixels=30, dXForGrid=2, dYForGrid=2, dZForGrid=2, dRForGrid=2, dThetaForGrid=10), ClipPlanes(ClipPlaneOptions(DisableWhenDrawingNewPlane=true, ForceOpqaueForUnclipped=false, ShowClipped=false, Transparency=0, HandleColor=16776960)))))
+						Circuit(Editor3d(View('View Orientation Gadget'=1, WindowPos(5, -1, -1, -8, -31, 52, 52, 1094, 312), OrientationMatrix(-0.026939744129777, -9.31322574615479e-10, 1.86264503820865e-09, 0, -1.86264503820865e-09, -2.79396772384644e-09, 0.0269397459924221, 0, 8.47033443385214e-10, 0.026939744129777, -1.86264514923096e-09, 0, -0.683380842208862, -0.769804060459137, -5.81964302062988, 1, 0, -4.21658992767334, 4.21658992767334, -1, 1, 0.745925903320313, 10.465690612793), Drawings[2: 'Box1', 'Mag_E1'], 'View Data'('Render Mode'=1, 'Show Ruler'=1, 'Coordinate Systems View Mode'=1, 'CS Triad View Mode'=0, 'Render Facets'=1, GridVisible=1, GridAutoAdjust=1, GridAutoExtents=1, GridType='Rect', GridStyle='Line', NumPixels=30, dXForGrid=10, dYForGrid=10, dZForGrid=10, dRForGrid=10, dThetaForGrid=10), ClipPlanes(ClipPlaneOptions(DisableWhenDrawingNewPlane=true, ForceOpqaueForUnclipped=false, ShowClipped=false, Transparency=0, HandleColor=16776960)))))
 					$end 'EditorWindow'
 				$end 'WindowPosition'
 				$begin 'ReportSetup'
@@ -3094,8 +3184,8 @@ NumFiles= 1
 $begin 'sab'
 Design_4.setup/NativeGeometryFiles/0000006.sab
 BIN000000134528
-ACIS BinaryFileT             SpatialACIS 29.0.1 NTFri Mar 26 13:43:09 2021      ğ?íµ ÷Æ°>»½×Ùß|Û=
-MCN42GJKWBW8RJ8F4FFDF5HYX245M5D54_ACVMG73YCTKPP6XTAPKKE64UAQ3MM7EB8PUJX6VA89MM	body%      ÿÿÿÿÿÿÿÿÿÿÿÿ       ÿÿÿÿ   
+ACIS BinaryFileT             SpatialACIS 29.0.1 NTMon Apr  5 12:27:25 2021      ğ?íµ ÷Æ°>»½×Ùß|Û=
+MHV3KKMRRB5FQ9XRE2QRBP6_P54AM7BNGHBFMP673Q88CPM5EBC7ME47BBAJMFZ7AQ8P3MEQUEBDCN	body%      ÿÿÿÿÿÿÿÿÿÿÿÿ       ÿÿÿÿ   
 ffffffIÀ                             À/@33333“L@string_attrib%   name_attrib%   gen%   attrib%   ÿÿÿÿÿÿÿÿ   ÿÿÿÿ    ¦îß ATTRIB_XACIS_NAME%6Solid1	lump%      ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ       
 ffffffIÀ                             À/@33333“L@transform%   ÿÿÿÿÿÿÿÿ      ğ?                              ğ?                              ğ?                              ğ?properties%	   ansoft%
    %   ÿÿÿÿÿÿÿÿ          ¥îÛ Solid1           ¿¿¿€%   %   %   %   ÿÿÿÿÿÿÿÿ   ÿÿÿÿ   ¦îß ATTRIB_XACIS_ID%1114
@@ -4182,8 +4272,8 @@ h|'@tËà}*CÀˆBë%@Œ$Èz'@EÙ¼Ç$CÀhú*@™¦»ò(@CpéÌa5CÀZÇ ®@E{
 # Ansoft project setting data. Non-Ansoft programs
 # should not read the rest of this file.
 B_SETNGS 1.03
-ACIS BinaryFileT             SpatialACIS 29.0.1 NTFri Mar 26 13:43:09 2021      ğ?íµ ÷Æ°>»½×Ùß|Û=
-MFWKCJBA9ZJ2W2WQH8QJWF8KGC28V7UPCDB4CJM5FBBMUQ6ND7CA4G477YC84GRP5FAMKKGQ7FACMJtransform%      ÿÿÿÿ      ğ?                              ğ?                              ğ?                              ğ?
+ACIS BinaryFileT             SpatialACIS 29.0.1 NTMon Apr  5 12:27:25 2021      ğ?íµ ÷Æ°>»½×Ùß|Û=
+M9CBS_TMBW2XKBVE944BHSZP2_9UU29PM_DPCN6PDB8TVM66DQAU3FA533BNMR27UXDUBG863FC_4Qtransform%      ÿÿÿÿ      ğ?                              ğ?                              ğ?                              ğ?
 point%      ÿÿÿÿÿÿÿÿÿÿÿÿ                        	flag%   ansoft%   attrib%   ÿÿÿÿÿÿÿÿ   ÿÿÿÿ    ¥îÛ     
 color%   %   %   ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ   ¥îÛ ÿ ÿ€
 units%   %   %   ÿÿÿÿÿÿÿÿ          ¥îÛ mm     @@%   %   %   ÿÿÿÿÿÿÿÿÿÿÿÿ       ¥îÛ ÀÀÀ€End-of-ACIS-data

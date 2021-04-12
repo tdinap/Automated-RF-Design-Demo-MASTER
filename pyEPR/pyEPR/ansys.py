@@ -2418,6 +2418,19 @@ class HfssModeler(COMWrapper):
         )
 
 
+
+    def thicken_sheet(self, blank_name, thickness = "200nm", both_sides=False):
+        selection_array = ["NAME:Selections",
+                           "Selections:=",  blank_name,
+                           "NewPartsModelFlag:="	, "Model"]
+        self._modeler.ThickenSheet(
+            selection_array,
+            ["NAME:SheetThickenParameters", "Thickness:=", thickness, "BothSides:=", both_sides]
+        )
+        return blank_name
+
+
+
     def get_boundary_assignment(self, boundary_name: str):
         # Gets a list of face IDs associated with the given boundary or excitation assignment.
         objects = self._boundaries.GetBoundaryAssignment(boundary_name)
