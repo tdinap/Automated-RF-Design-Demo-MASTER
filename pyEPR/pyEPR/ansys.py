@@ -2049,6 +2049,10 @@ class Optimetrics(COMWrapper):
             assert len(swp_params) == 3
             # e.g., "LIN 12.8nH 13.6nH 0.2nH"
             swp_str = f"LIN {swp_params[0]} {swp_params[1]} {swp_params[2]}"
+        elif swp_type == 'decade':
+            # assert len(swp_params) == 3
+            # e.g., "DEC 0.01nH 10nH 5"
+            swp_str = f"DEC {swp_params[0]} {swp_params[1]} {swp_params[2]}"
         else:
             raise NotImplementedError()
 
