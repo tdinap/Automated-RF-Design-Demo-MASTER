@@ -1199,7 +1199,7 @@ class HfssSetup(HfssPropertyObject):
         return self.parent._design.Solve(name)
 
     def insert_sweep(self, start_ghz, stop_ghz, count=None, step_ghz=None,
-                     name="Sweep", type="Fast", save_fields=False, generate_all_fields=False):
+                     name="Sweep", type="Fast", save_fields=False):
 
         if not type in ['Fast', 'Interpolating', 'Discrete']:
             logger.error(
@@ -1212,7 +1212,7 @@ class HfssSetup(HfssPropertyObject):
             "Type:=", type,
             "SaveFields:=", save_fields,
             "SaveRadFields:=", False,
-            "GenerateFieldsForAllFreqs:=", generate_all_fields,
+            # "GenerateFieldsForAllFreqs:="
             "ExtrapToDC:=", False,
         ]
 
@@ -2515,9 +2515,6 @@ class HfssModeler(COMWrapper):
                 ]
         return self._boundaries.AssignNet(params)
 
-    # Tom's update
-    def autoidentify_nets(self):
-        return self._boundaries.AutoIdentifyNets()
 
     def assign_perfect_E(self, obj, face=None, name='PerfE'):
         '''
