@@ -1199,7 +1199,8 @@ class HfssSetup(HfssPropertyObject):
         return self.parent._design.Solve(name)
 
     def insert_sweep(self, start_ghz, stop_ghz, count=None, step_ghz=None,
-                     name="Sweep", type="Fast", save_fields=False, generate_all_fields=False):
+                     name="Sweep", type="Fast", save_fields=False):
+                     # removed the following: , generate_all_fields=False):
 
         if not type in ['Fast', 'Interpolating', 'Discrete']:
             logger.error(
@@ -1212,9 +1213,10 @@ class HfssSetup(HfssPropertyObject):
             "Type:=", type,
             "SaveFields:=", save_fields,
             "SaveRadFields:=", False,
-            "GenerateFieldsForAllFreqs:=", generate_all_fields,
             "ExtrapToDC:=", False,
         ]
+         #removed "GenerateFieldsForAllFreqs:=", generate_all_fields,
+
 
         # not sure hwen extacyl this changed between 2016 and 2019
         if self._ansys_version >= '2019':
@@ -1773,6 +1775,35 @@ class HfssEMDesignSolutions(HfssDesignSolutions):
         #return []
     self._solutions.ExportEigenmodes(soln_name, ['Pass:=5'], fn) # ['Pass:=5'] fails  can do with ''
     """
+    
+    def eigenmodeQs(self, lv=""):
+        #self._solutions.ExportEigenmodes(self.parent.solution_name, "test", "eigentest")
+        fn = tempfile.mktemp()
+        #print(self.parent.solution_name, lv, fn)
+        self._solutions.ExportEigenmodes(self.parent.solution_name, lv, fn)
+        data = np.genfromtxt(fn, dtype='float') #was str
+        # Update to Py 3:
+        # np.loadtxt and np.genfromtxt operate in byte mode, which is the default string type in Python 2.
+        # But Python 3 uses unicode, and marks bytestrings with this b.
+        # getting around the very annoying fact that
+        if np.size(np.shape(data)) == 1:
+            # in Python a 1D array does not have shape (N,1)
+            data = np.array([data])
+        else:                                  # but rather (N,) ....
+            pass
+        if np.size(data[0, :]) == 6:  # checking if values for Q were saved
+            # eigvalue=(omega-i*kappa/2)/2pi
+            kappa_over_2pis = [2*float(ii) for ii in data[:, 3]]
+            # so kappa/2pi = 2*Im(eigvalue)
+            Qs = data[:,-1]
+        else:
+            kappa_over_2pis = None
+
+        # print(data[:,1])
+        freqs = [float(ii) for ii in data[:, 1]]
+        #return freqs, kappa_over_2pis
+        return Qs 
+        
 
     def set_mode(self, n, phase=0, FieldType='EigenStoredEnergy'):
         '''
@@ -1866,6 +1897,160 @@ class HfssEMDesignSolutions(HfssDesignSolutions):
                                      f"{setup.name} : {pass_name}", [], params,
                                      ["X Component:=", xcomp,
                                       "Y Component:=", ycomp], [])
+
+    
+    #def create_fields_report(self, plot_name, xcomp, ycomp, params, pass_name='LastAdaptive'):
+    #def get_field_strengths(self, plot_name, setup_name='Test_EM',  pass_name='LastAdaptive', line_name='Polyline1', numpts=100, xcomp='Distance', ycomp='Mag_E'):
+    def get_field_strengths(self, plot_name, setup_name='Test_EM',  pass_name='LastAdaptive', line_name='Polyline1', numpts=100, xcomp='Distance', ycomp='Mag_E',filename="FieldPlot"):
+        '''
+        pass_name: AdaptivePass, LastAdaptive
+
+        Example
+        ------------------------------------------------------
+        Exammple plot for a single vareiation all pass converge of mode freq
+        .. code-block python
+            ycomp = [f"re(Mode({i}))" for i in range(1,1+epr_hfss.n_modes)]
+            params = ["Pass:=", ["All"]]+variation
+            setup.create_report("Freq. vs. pass", "Pass", ycomp, params, pass_name='AdaptivePass')
+        '''
+        #assert isinstance(ycomp, list)
+#        assert isinstance(params, list)
+
+        setup = self.parent
+        reporter = setup._reporter
+        design = setup.parent._design
+        #self._design = design
+        #return reporter.CreateReport(plot_name, "Fields", "Rectangular Plot",
+        #                             f"{setup.name} : {pass_name}", [], params)#,
+        #                             #["X Component:=", xcomp,
+        #                              #"Y Component:=", ycomp], [])
+        '''reporter.CreateReport(plot_name, "Fields", "Rectangular Plot", setup_name + ' : ' + pass_name, 
+                [
+                    "Context:="		, line_name,
+                    "PointCount:="		, numpts
+                ], 
+                [
+                    "Distance:="		, ["All"],
+                    "Phase:="		, ["0deg"]
+                ], 
+                [
+                    "X Component:="		, xcomp,
+                    "Y Component:="		, [ycomp]
+                ])
+                '''     
+        oModule1 = design.GetModule("ReportSetup")
+        #oModule1.CreateReport(" Plot 111", "Fields", "Rectangular Plot", "Test_EM : LastAdaptive", 
+        oModule1.CreateReport(plot_name, "Fields", "Rectangular Plot", setup_name + ' : ' + pass_name, 
+            [
+                "Context:="		, line_name,#"Polyline1",
+                "PointCount:="		, numpts#101
+            ], 
+            [
+                "Distance:="		, ["All"],
+                "Phase:="		, ["0deg"]#,
+                #"Stock_L:="		, ["Nominal"],
+                #"Stock_W:="		, ["Nominal"],
+                #"Stock_H:="		, ["Nominal"]
+            ], 
+            [
+                "X Component:="		, xcomp,
+                "Y Component:="		, [ycomp]
+            ])
+        oModule1.ExportToFile(plot_name, filename+".csv", False)#"C:/Users/Tom/OneDrive - Rutgers University/Chakram Lab/Multimode Cavity/Simulation Files/"+filename".csv", False)
+
+        
+        
+        
+        
+        
+        '''
+        oModule1 = design.GetModule("FieldsReporter")#setup.parent.GetModule("FieldsReporter")
+        oModule1.CreateFieldPlot(
+            [
+                "NAME:"+plot_name,
+                "SolutionName:="	, setup_name + ' : ' + pass_name,#"Test_EM : LastAdaptive",
+                "UserSpecifyName:="	, 0,#0
+                "UserSpecifyFolder:="	, 0,
+                "QuantityName:="	, ycomp,#"Mag_E",
+                "PlotFolder:="		, "E Field",
+                "StreamlinePlot:="	, False,
+                "AdjacentSidePlot:="	, False,
+                "FullModelPlot:="	, False,
+                "IntrinsicVar:="	, "Phase=\'0deg\'",
+                "PlotGeomInfo:="	, [1,"Line",1,line_name],#"Polyline1"],
+                "FilterBoxes:="		, [1,""],
+                [
+                    "NAME:PlotOnLineSettings",
+                    [
+                        "NAME:LineSettingsID",
+                        "Width:="		, 4,
+                        "Style:="		, "Cylinder"
+                    ],
+                    "IsoValType:="		, "Tone",
+                    "ArrowUniform:="	, False,
+                    "NumofArrow:="		, 100,
+                    "Refinement:="		, 0
+                ],
+                "EnableGaussianSmoothing:=", False
+            ], "Field")
+        #oModule1 = design.GetModule("ReportSetup")#setup.parent.GetModule("ReportSetup")
+        #oModule1.ExportToFile(plot_name, plot_name + '.csv', False)#"C:/Users/Tom/OneDrive - Rutgers University/Chakram Lab/Multimode Cavity/Simulation Files/Plot 5.csv", False)
+'''
+#########################
+
+'''oModule.CreateReport(" Plot 2", "Fields", "Rectangular Plot", "Test_EM : LastAdaptive", 
+	[
+		"Context:="		, "Polyline1",
+		"PointCount:="		, 119
+	], 
+	[
+		"Distance:="		, ["All"],
+		"Phase:="		, ["0deg"],
+		"Stock_L:="		, ["Nominal"],
+		"Stock_W:="		, ["Nominal"],
+		"Stock_H:="		, ["Nominal"]
+	], 
+	[
+		"X Component:="		, "Distance",
+		"Y Component:="		, ["Mag_E"]
+	])'''
+
+'''
+oModule = oDesign.GetModule("FieldsReporter")
+oModule.CreateFieldPlot(
+	[
+		"NAME:Mag_E1",
+		"SolutionName:="	, "Test_EM : LastAdaptive",
+		"UserSpecifyName:="	, 0,
+		"UserSpecifyFolder:="	, 0,
+		"QuantityName:="	, "Mag_E",
+		"PlotFolder:="		, "E Field",
+		"StreamlinePlot:="	, False,
+		"AdjacentSidePlot:="	, False,
+		"FullModelPlot:="	, False,
+		"IntrinsicVar:="	, "Phase=\'0deg\'",
+		"PlotGeomInfo:="	, [1,"Line",1,"Polyline1"],
+		"FilterBoxes:="		, [1,""],
+		[
+			"NAME:PlotOnLineSettings",
+			[
+				"NAME:LineSettingsID",
+				"Width:="		, 4,
+				"Style:="		, "Cylinder"
+			],
+			"IsoValType:="		, "Tone",
+			"ArrowUniform:="	, False,
+			"NumofArrow:="		, 100,
+			"Refinement:="		, 0
+		],
+		"EnableGaussianSmoothing:=", False
+	], "Field")
+oModule = oDesign.GetModule("ReportSetup")
+oModule.ExportToFile(" Plot 5", "C:/Users/Tom/OneDrive - Rutgers University/Chakram Lab/Multimode Cavity/Simulation Files/Plot 5.csv", False)
+
+'''
+
+
 
 
 class HfssDMDesignSolutions(HfssDesignSolutions):
@@ -2189,6 +2374,37 @@ class HfssModeler(COMWrapper):
                "Objects:=", objects,
                'MaxLength:=', max_length]
         ops = ['RefineInside', 'Enabled', 'RestrictElem',
+               'NumMaxElem', 'RestrictLength']
+        for key, val in kwargs.items():
+            if key in ops:
+                if type(val)==bool:
+                    arr += [key+':=', val]
+                else:
+                    arr += [key+':=', str(val)]
+            else:
+                logger.error('KEY `{key}` NOT IN ops!')
+
+        self._mesh.AssignLengthOp(arr)
+        
+        
+    def mesh_length_face(self, name_mesh, faces: list, max_length='0.1mm', **kwargs):
+        '''
+        "RefineInside:="	, False,
+        "Enabled:="		, True,
+        "RestrictElem:="	, False,
+        "NumMaxElem:="		, "1000",
+        "RestrictLength:="	, True,
+        "MaxLength:="		, "0.1mm"
+
+        Example use:
+        modeler.assign_mesh_length('mesh2', ["Q1_mesh"], MaxLength=0.1)
+        '''
+        assert isinstance(faces, list)
+
+        arr = [f"NAME:{name_mesh}",
+               "Faces:=", faces,
+               'MaxLength:=', max_length]
+        ops = ['Objects', 'RefineInside', 'Enabled', 'RestrictElem',
                'NumMaxElem', 'RestrictLength']
         for key, val in kwargs.items():
             if key in ops:
@@ -2692,7 +2908,7 @@ class HfssModeler(COMWrapper):
         try:
             return self._modeler.GetFaceByPosition(params)
         except:
-            print('No face found at position %.2s, %.2s, %.2s'%(str(x_pos), str(y_pos), str(z_pos)))
+            print('No face found at position %.5s, %.5s, %.5s'%(str(x_pos), str(y_pos), str(z_pos)))
             return None
 
     def get_edge_ids_by_face(self, face):
